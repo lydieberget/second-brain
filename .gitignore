@@ -1,0 +1,29 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# MkDocs build output (site/docs/ is regenerated from wiki/ at build time)
+site/docs/
+site/site/
+
+# Node
+node_modules/
+.netlify/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Obsidian
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Large PDFs (track with git-lfs or exclude)
+# Uncomment if you don't want PDFs in git:
+# raw/papers/*.pdf

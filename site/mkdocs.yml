@@ -1,0 +1,136 @@
+site_name: "ArXiv Second Brain"
+site_description: "A living knowledge base of research papers, concepts, and connections"
+
+docs_dir: docs
+site_dir: site
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+  font:
+    text: "Source Serif 4"
+    code: "JetBrains Mono"
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - toc.follow
+
+plugins:
+  - search
+  - tags
+  - mermaid2:
+      version: 10.9.0
+      arguments:
+        securityLevel: loose
+        theme: default
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.snippets
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+extra_javascript:
+  - javascripts/mathjax-config.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js
+
+nav:
+  - Home: index.md
+  - Using the Wiki in Code: use.md
+  - Schema (CLAUDE.md): schema.md
+  - Skills:
+      - skills/index.md
+      - skills/arxiv-ingest.md
+      - skills/wiki-lint.md
+      - skills/wiki-mindmap.md
+      - skills/wiki-deploy.md
+  - Papers:
+      - papers/attention-is-all-you-need.md
+      - papers/price-impact-order-book-events.md
+      - papers/bouchaud-farmer-lillo-propagator.md
+      - papers/brokmann-slow-decay-impact.md
+      - papers/lipton-quote-imbalance.md
+      - papers/gould-bonart-queue-imbalance.md
+      - papers/mlofi-xu-gould-howison.md
+      - papers/price-impact-generalized-ofi.md
+      - papers/csi300-ou-levy-ofi.md
+      - papers/adaptive-learning-csi300.md
+      - papers/deep-lob-forecasting.md
+      - papers/forecasting-high-frequency-ofi.md
+      - papers/order-flow-filtration.md
+      - papers/explainable-crypto-microstructure.md
+      - papers/reality-gap-lob-simulation.md
+      - papers/mpc-trade-execution.md
+      - papers/cfmm-liquidity-provision-pricing.md
+      - papers/entropic-signatures-market-response.md
+  - Concepts:
+      - concepts/order-flow-imbalance.md
+      - concepts/price-impact.md
+      - concepts/limit-order-book.md
+      - concepts/market-microstructure.md
+      - concepts/adverse-selection.md
+      - concepts/transformer-architecture.md
+      - concepts/optimal-execution.md
+      - concepts/market-making.md
+  - Methods:
+      - methods/multi-head-attention.md
+      - methods/hawkes-process.md
+      - methods/shap-values.md
+      - methods/queue-reactive-model.md
+      - methods/propagator-model.md
+      - methods/microprice.md
+  - Connections:
+      - connections/deep-learning-meets-market-microstructure.md
+  - Entities:
+      - entities/rama-cont.md
+      - entities/sasha-stoikov.md
+      - entities/google-brain.md
+  - Mind Maps:
+      - mindmaps/market-microstructure.md
+  - Log: log.md
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/

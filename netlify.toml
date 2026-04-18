@@ -1,0 +1,23 @@
+[build]
+  command = "cd site && pip install mkdocs-material pymdown-extensions mkdocs-mermaid2-plugin && mkdocs build"
+  publish = "site/site"
+  functions = "site/netlify/functions"
+
+[build.environment]
+  PYTHON_VERSION = "3.11"
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"

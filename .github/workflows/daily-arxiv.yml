@@ -1,0 +1,53 @@
+name: Daily arXiv Fetch
+
+on:
+  schedule:
+    # Run at 07:00 UTC every weekday
+    - cron: '0 7 * * 1-5'
+  workflow_dispatch:  # Manual trigger
+
+env:
+  ARXIV_CATEGORIES: "cs.LG,cs.AI,cs.CL,q-fin.TR,q-fin.CP,q-fin.ST,q-bio.QM"
+  ARXIV_MAX_DAILY: 5
+  ARXIV_KEYWORDS: "transformer,attention,market making,reinforcement learning,genomics,bioinformatics"
+
+jobs:
+  fetch-papers:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install arxiv requests rich
+
+      - name: Fetch new papers
+        run: |
+          python scripts/fetch_daily.py \
+            --categories "$ARXIV_CATEGORIES" \
+            --keywords "$ARXIV_KEYWORDS" \
+            --max "$ARXIV_MAX_DAILY" \
+            --output raw/papers/
+
+      - name: Check for new papers
+        id: check
+        run: |
+          if [[ -n $(git status --porcelain raw/papers/) ]]; then
+            echo "has_new=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_new=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit new papers
+        if: steps.check.outputs.has_new == 'true'
+        run: |
+          git config user.name "arxiv-bot"
+          git config user.email "bot@arxiv-second-brain"
+          git add raw/papers/
+          git commit -m "📄 Daily arXiv fetch — $(date +%Y-%m-%d)"
+          git push

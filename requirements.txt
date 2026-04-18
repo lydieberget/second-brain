@@ -1,0 +1,18 @@
+# Core (install now)
+arxiv>=2.1.0
+requests>=2.31.0
+python-frontmatter>=1.1.0
+rich>=13.7.0
+networkx>=3.2
+
+# MkDocs (install when you're ready to deploy)
+# pip install mkdocs-material pymdown-extensions mkdocs-mermaid2-plugin
+
+# Paper QA (install later, it's heavy)
+# pip install paper-qa
+
+# PDF conversion — pymupdf4llm is default (fast, CPU, ~30MB)
+pymupdf4llm>=0.0.5
+
+# Optional: marker-pdf for higher-quality extraction (heavy ML models, ~1-2GB)
+# pip install marker-pdf
