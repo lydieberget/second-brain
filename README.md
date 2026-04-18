@@ -48,3 +48,4 @@ Every push to `main` triggers [`.github/workflows/deploy-pages.yml`](.github/wor
 ## License
 
 Source material (PDFs in `raw/papers/`) retains its original arXiv licensing. Wiki synthesis content is owned by the repo owner.
+
