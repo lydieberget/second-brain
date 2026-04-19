@@ -24,7 +24,15 @@ python scripts/sync_wiki_to_mkdocs.py
 
 The script copies everything in `wiki/` to `site/docs/` and rewrites `[[wikilinks]]` into MkDocs-compatible relative links. Preserves `site/docs/javascripts/` (MathJax config) across runs.
 
-### 2. Build statically
+### 2. Preflight: MathJax sanity check
+
+```bash
+python scripts/preflight_mathjax.py
+```
+
+Validates the four regression-prone conditions that broke math rendering on 2026-04-16 / -17 / -18: mathjax-config.js load order in `mkdocs.yml`, delimiter set in the config (no bare `$`), `document$.subscribe` guard for Material's instant-nav observable, and cache clears on SPA page swaps. Non-zero exit must block the deploy — do not proceed to the build step until it passes. If it fails, the error code (M1..M4, C1..C6) identifies the specific regression; see `scripts/preflight_mathjax.py` docstring for the full list.
+
+### 3. Build statically
 
 ```bash
 cd site && mkdocs build --strict
@@ -34,7 +42,7 @@ cd site && mkdocs build --strict
 
 Output lands in `site/site/`. Expected: `index.html`, 404 page, `assets/`, `javascripts/`, one directory per section (`papers/`, `concepts/`, `methods/`, etc.).
 
-### 3. Local preview (optional but recommended)
+### 4. Local preview (optional but recommended)
 
 ```bash
 cd site && mkdocs serve
@@ -69,7 +77,7 @@ Current public URL: the `https://<owner>.github.io/second-brain/` after GitHub P
 
 ## Troubleshooting
 
-- **Equations render as raw LaTeX**: check that `site/docs/javascripts/mathjax-config.js` loads BEFORE MathJax CDN in `mkdocs.yml` `extra_javascript`, and that it uses only `\\(...\\)` / `\\[...\\]` delimiters (no `$`/`$$` — those conflict with arithmatex `generic: true`).
+- **Equations render as raw LaTeX**: run `python scripts/preflight_mathjax.py` — it covers the four recurring causes (load order in `mkdocs.yml`, bare `$` delimiters conflicting with arithmatex `generic: true`, unguarded `document$.subscribe`, missing SPA-nav cache clears). Failure codes map 1:1 to each cause.
 - **Mermaid diagrams don't render**: check `mermaid2` plugin is listed in `mkdocs.yml` plugins and Mermaid version ≥ 10.x (for `mindmap` type support).
 - **Click on diagram node does nothing**: the `mermaid2` plugin config must include `arguments: { securityLevel: loose }`. Mermaid defaults to `strict` which silently blocks `click` directives.
 - **Dev server shows old content after sync**: kill and restart `mkdocs serve` — it occasionally caches. `netstat -ano | grep :8000` then `taskkill //F //PID <pid>`.
