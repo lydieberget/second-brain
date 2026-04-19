@@ -12,7 +12,7 @@ Three layers:
 - `wiki/` — LLM-generated synthesis pages organised by type (papers, concepts, methods, entities, comparisons, connections, mindmaps).
 - `CLAUDE.md` + `.claude/skills/` — schema and operation protocols that drive how the wiki is built.
 
-See the [site Home page](https://) for the full layer-architecture explanation and wiki-vs-RAG comparison.
+See the [site Home page](https://lydieberget.github.io/second-brain/) for the full layer-architecture explanation and wiki-vs-RAG comparison.
 
 ## Local development
 
