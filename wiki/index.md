@@ -6,7 +6,7 @@ title: "ArXiv Second Brain"
 
 ## TL;DR
 
-- **What**: a personal research wiki synthesised by Claude Opus 4.7 from arXiv papers, published as a static site. 18 papers, 42 pages, 1 mindmap.
+- **What**: a personal research wiki synthesised by Claude Opus 4.7 from arXiv papers, published as a static site. 23 papers, 58 pages, 1 mindmap.
 - **Pattern**: Karpathy's three-layer LLM Wiki — raw PDFs ([Layer 1](#what-this-is)) → curated wiki pages (Layer 2) → slim schema + on-demand [skills](skills/index.md) (Layer 3).
 - **Focus**: market microstructure.
 - **Not RAG**: pages are pre-synthesised, opinionated, and cross-linked rather than retrieved ad-hoc from chunks — see [wiki vs RAG](#how-it-differs-from-rag).
@@ -116,9 +116,9 @@ Each recurring operation has its own playbook loaded on demand — see [Skills](
 
 ## What's in here right now
 
-- **18 papers** with full wiki synthesis pages — anchored in market microstructure signal design, with Chinese-market and classical foundational coverage.
-- **7 more papers** sitting as full-text markdown in the raw corpus, waiting to be wiki'd next.
-- **8 concept pages**, **4 method pages**, **3 entity pages**, **1 cross-domain connection page**.
+- **23 papers** with full wiki synthesis pages — anchored in market microstructure signal design, with Chinese-market and classical foundational coverage, and a new 2026-04-23 cluster around multi-level OFI aggregation, universal deep-learning price formation, per-event-type impact decomposition, and signal-aware optimal execution.
+- **2 more papers** sitting as full-text markdown in the raw corpus, waiting to be wiki'd next.
+- **10 concept pages**, **10 method pages**, **8 entity pages**, **1 cross-domain connection page**.
 - **1 per-domain mindmap** ([market microstructure](mindmaps/market-microstructure.md)) with three interactive Mermaid diagrams.
 - Two orthogonal OFI conventions correctly distinguished — the *event-based* one from Cont–Kukanov–Stoikov vs the *trade-based* one in the Easley–O'Hara / Anantha–Jain tradition.
 - A cross-paper tick-size finding: large-tick assets are most forecastable, converging evidence from equities (Briola et al. 2024) and crypto (Bieganowski–Ślepaczuk 2026).
@@ -144,10 +144,14 @@ Each recurring operation has its own playbook loaded on demand — see [Skills](
 ### Quantitative Finance — Market Microstructure (OFI / OBI / Impact)
 - [The Price Impact of Order Book Events](papers/price-impact-order-book-events.md) — Cont, Kukanov, Stoikov, 2010
 - [How Markets Slowly Digest Changes in Supply and Demand](papers/bouchaud-farmer-lillo-propagator.md) — Bouchaud, Farmer, Lillo, 2008
+- [The Price Impact of Order Book Events: Market Orders, Limit Orders and Cancellations](papers/eisler-bouchaud-kockelkoren-order-book-events.md) — Eisler, Bouchaud, Kockelkoren, 2009
+- [Models for the Impact of All Order Book Events](papers/models-for-all-order-book-events.md) — Eisler, Bouchaud, Kockelkoren, 2011
 - [Slow Decay of Impact in Equity Markets](papers/brokmann-slow-decay-impact.md) — Brokmann, Sérié, Kockelkoren, Bouchaud, 2014
 - [Trade Arrival Dynamics and Quote Imbalance](papers/lipton-quote-imbalance.md) — Lipton, Pesavento, Sotiropoulos, 2013
 - [Queue Imbalance as a One-Tick-Ahead Price Predictor](papers/gould-bonart-queue-imbalance.md) — Gould, Bonart, 2015
 - [Multi-Level Order-Flow Imbalance](papers/mlofi-xu-gould-howison.md) — Xu, Gould, Howison, 2019
+- [Cross-Impact of Order Flow Imbalance in Equity Markets](papers/cross-impact-ofi-equity-markets.md) — Cont, Cucuringu, Zhang, 2023
+- [Universal Features of Price Formation in Financial Markets](papers/universal-price-formation-sirignano-cont.md) — Sirignano, Cont, 2018
 
 ### Quantitative Finance — Chinese Markets
 - [The Price Impact of Generalized OFI](papers/price-impact-generalized-ofi.md) — Su et al., 2021 (CSI 500)
@@ -161,34 +165,46 @@ Each recurring operation has its own playbook loaded on demand — see [Skills](
 - [Explainable Patterns in Crypto Microstructure](papers/explainable-crypto-microstructure.md) — Bieganowski, Ślepaczuk, 2026
 - [Bridging the Reality Gap in LOB Simulation](papers/reality-gap-lob-simulation.md) — Noble, Rosenbaum, Souilmi, 2026
 - [Model Predictive Control For Trade Execution](papers/mpc-trade-execution.md) — McAuliffe et al., 2026
+- [Incorporating Signals into Optimal Trading](papers/lehalle-neuman-signals-optimal-trading.md) — Lehalle, Neuman, 2019
 - [Pricing and Hedging for Liquidity Provision in CFMM](papers/cfmm-liquidity-provision-pricing.md) — Risk, Tung, Wang, 2026
 - [Entropic Signatures of Market Response](papers/entropic-signatures-market-response.md) — Drzazga-Szczȩśniak et al., 2026 (macro-flavoured)
 
 ## By type
 
-**Papers (18)** — see domain groupings above.
+**Papers (23)** — see domain groupings above.
 
-### Concepts (8)
+### Concepts (10)
 - [Order Flow Imbalance](concepts/order-flow-imbalance.md) — central signal for short-horizon price prediction
 - [Limit Order Book](concepts/limit-order-book.md) — the mechanism and data structure underlying microstructure
 - [Price Impact](concepts/price-impact.md) — how order flow moves prices
+- [Cross-Impact](concepts/cross-impact.md) — multi-asset extension of price impact
+- [Universal Price Formation](concepts/universal-price-formation.md) — the LOB→price map is stock-agnostic
 - [Market Microstructure](concepts/market-microstructure.md) — overarching domain
 - [Transformer Architecture](concepts/transformer-architecture.md) — foundational DL architecture
 - [Adverse Selection](concepts/adverse-selection.md) — informed vs uninformed flow; spread theory
 - [Optimal Execution](concepts/optimal-execution.md) — balancing completion / impact / opportunity cost
 - [Market Making](concepts/market-making.md) — LOB quoting and AMM liquidity provision unified
 
-### Methods (6)
+### Methods (10)
 - [Multi-Head Attention](methods/multi-head-attention.md) — core Transformer mechanism
 - [Hawkes Process](methods/hawkes-process.md) — self-exciting point process for order flow modelling
 - [SHAP Values](methods/shap-values.md) — model explainability via Shapley values
 - [Queue-Reactive Model](methods/queue-reactive-model.md) — Markov jump LOB simulator
 - [Propagator Model (Transient Impact Kernel)](methods/propagator-model.md) — $r_t = \sum G(t-t') \cdot \varepsilon_{t'}$ framework for market impact
 - [Microprice](methods/microprice.md) — queue-weighted fair-value estimator above the mid
+- [Almgren-Chriss](methods/almgren-chriss.md) — canonical static mean-variance optimal execution; industry baseline
+- [Integrated OFI](methods/integrated-ofi.md) — PCA-first-PC aggregation of multi-level OFI into a single scalar
+- [Event-Type Impact Decomposition (EBK)](methods/event-type-impact-decomposition.md) — per-event-type bare-impact framework
+- [Signal-Aware Optimal Execution](methods/signal-aware-optimal-execution.md) — GSS + Markovian signal closed-form schedule
 
-### Entities (3)
-- [Rama Cont](entities/rama-cont.md) — co-inventor of OFI
+### Entities (8)
+- [Rama Cont](entities/rama-cont.md) — co-inventor of OFI; universal price formation; cross-impact OFI
 - [Sasha Stoikov](entities/sasha-stoikov.md) — co-inventor of OFI; Avellaneda-Stoikov market making model
+- [Mihai Cucuringu](entities/mihai-cucuringu.md) — cross-impact of OFI; spectral methods on financial networks
+- [Justin Sirignano](entities/justin-sirignano.md) — universal price formation deep-learning on LOB
+- [Jean-Philippe Bouchaud](entities/jean-philippe-bouchaud.md) — propagator model; event-type impact decomposition
+- [Zoltán Eisler](entities/zoltan-eisler.md) — EBK event-type impact decomposition
+- [Charles-Albert Lehalle](entities/charles-albert-lehalle.md) — signal-aware optimal execution; OBI empirics
 - [Google Brain](entities/google-brain.md) — institution behind the Transformer
 
 ### Connections & Mindmaps
@@ -199,6 +215,7 @@ Each recurring operation has its own playbook loaded on demand — see [Skills](
 
 ## Recent additions
 
+- **2026-04-23**: Batch ingest of 5 OFI / impact / execution papers focused on signal design from LOB snapshots and L3 data: Cont-Cucuringu-Zhang (cross-impact of OFI), Sirignano-Cont (universal price formation via deep learning), Eisler-Bouchaud-Kockelkoren (event-type impact decomposition, 2009 and 2011), and Lehalle-Neuman (signal-aware optimal execution). 3 new methods (integrated OFI, EBK event-type decomposition, signal-aware execution), 2 new concepts (cross-impact, universal price formation), 5 new entity pages (Cucuringu, Sirignano, Bouchaud, Eisler, Lehalle). Directly targets the "design a signal from LOB snapshots and/or L3 order book" research question.
 - **2026-04-17**: Overnight batch wiki-ingest of 8 signal-design papers (Lipton-Pesavento-Sotiropoulos, Xu-Gould-Howison MLOFI, Gould-Bonart queue imbalance, Bouchaud-Farmer-Lillo propagator, Brokmann slow-decay impact, Hu-Zhang CSI 300 OU-Lévy, Yang CSI 300 adaptive learning, Drzazga-Szczȩśniak entropic signatures). VPIN skipped — not on arXiv. **Tick-size regime theme now confirmed across 4 independent papers**.
 - **2026-04-17**: Landing page rewritten with three-layer architecture explanation, Karpathy-inspiration note, RAG-vs-wiki comparison, scalability / token-count section.
 - **2026-04-16**: Wiki-ingest of 3 new microstructure papers; mindmap created; site shipped to Netlify.

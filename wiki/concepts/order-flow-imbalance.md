@@ -2,13 +2,14 @@
 title: "Order Flow Imbalance"
 type: concept
 created: 2026-04-15
-updated: 2026-04-16
+updated: 2026-04-23
 sources:
   - raw/papers/1011.6402.md
   - raw/papers/2112.02947.md
   - raw/papers/2408.03594.md
   - raw/papers/2507.22712.md
   - raw/papers/2602.00776.md
+  - raw/papers/2112.13213.md
 tags:
   - market-microstructure
   - price-impact
@@ -18,11 +19,33 @@ related:
   - concepts/limit-order-book.md
   - concepts/price-impact.md
   - concepts/market-microstructure.md
+  - concepts/cross-impact.md
   - methods/hawkes-process.md
+  - methods/integrated-ofi.md
   - papers/price-impact-order-book-events.md
   - papers/price-impact-generalized-ofi.md
   - papers/forecasting-high-frequency-ofi.md
   - papers/order-flow-filtration.md
+  - papers/cross-impact-ofi-equity-markets.md
+  - concepts/adverse-selection.md
+  - concepts/market-making.md
+  - concepts/optimal-execution.md
+  - concepts/universal-price-formation.md
+  - entities/charles-albert-lehalle.md
+  - entities/mihai-cucuringu.md
+  - entities/rama-cont.md
+  - entities/sasha-stoikov.md
+  - methods/event-type-impact-decomposition.md
+  - methods/microprice.md
+  - methods/queue-reactive-model.md
+  - methods/signal-aware-optimal-execution.md
+  - papers/adaptive-learning-csi300.md
+  - papers/eisler-bouchaud-kockelkoren-order-book-events.md
+  - papers/explainable-crypto-microstructure.md
+  - papers/gould-bonart-queue-imbalance.md
+  - papers/lehalle-neuman-signals-optimal-trading.md
+  - papers/lipton-quote-imbalance.md
+  - papers/reality-gap-lob-simulation.md
 confidence: high
 ---
 
@@ -73,6 +96,8 @@ Deeper markets (more resting liquidity) require larger OFI to move price by a gi
 | log-OFI | Later work | Log-stationarised version |
 | GOFI | Su et al. (2021) | Handles non-minimum tick sizes |
 | log-GOFI | [[papers/price-impact-generalized-ofi]] | Log + generalised; R² ~84–86% on CSI 500 |
+| MLOFI (multi-level OFI vector) | [[papers/mlofi-xu-gould-howison]] | Per-level OFIs stacked; preserves level information |
+| [[methods/integrated-ofi\|Integrated OFI]] | [[papers/cross-impact-ofi-equity-markets]] | PCA first principal component across levels; $\ell_1$-normalised weights; +16–20 pts OOS $R^2$ over best-level |
 | OBI (Order Book Imbalance) | Various | Sometimes used interchangeably with OFI; can include multiple levels |
 | Filtered OBI | [[papers/order-flow-filtration]] | Filters on order lifetime/modification to isolate informed flow |
 
@@ -85,14 +110,17 @@ Deeper markets (more resting liquidity) require larger OFI to move price by a gi
 - Hawkes processes model OFI arrival dynamics and can forecast near-term OFI distributions ([[papers/forecasting-high-frequency-ofi]]).
 - Filtering on parent orders of executed trades (not aggregate flow) strengthens the OFI-return association ([[papers/order-flow-filtration]]).
 - OFI/OBI is the dominant SHAP feature in crypto LOB models ([[papers/explainable-crypto-microstructure]]).
+- **Aggregating multi-level OFIs via PCA** into an [[methods/integrated-ofi|integrated OFI]] raises contemporaneous OOS $R^2$ from 65% to 84% on Nasdaq-100 ([[papers/cross-impact-ofi-equity-markets]]).
+- **Cross-asset OFI** matters for forecasting but not for contemporaneous returns once multi-level info is integrated — see [[concepts/cross-impact]].
 
 ---
 
 ## Open questions
 
-- How does OFI behave at multiple depth levels simultaneously (multi-level OFI)?
+- ~~How does OFI behave at multiple depth levels simultaneously (multi-level OFI)?~~ — largely settled by MLOFI ([[papers/mlofi-xu-gould-howison]]) and integrated OFI ([[methods/integrated-ofi]]); PCA first component captures >89% variance.
 - Does the linear relationship hold under market stress (flash crashes, liquidity crises)?
 - How do latency arbitrageurs distort OFI signals in co-location environments?
+- Can a *level-aware* multi-level cross-impact model beat integrated-OFI at short-horizon forecasting? Raised in [[papers/cross-impact-ofi-equity-markets]] as a future direction.
 
 ---
 

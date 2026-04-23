@@ -18,8 +18,10 @@ related:
   - concepts/order-flow-imbalance.md
   - concepts/optimal-execution.md
   - methods/propagator-model.md
+  - methods/almgren-chriss.md
   - papers/bouchaud-farmer-lillo-propagator.md
   - papers/price-impact-order-book-events.md
+  - entities/jean-philippe-bouchaud.md
 confidence: high
 ---
 

@@ -17,6 +17,11 @@ related:
   - concepts/market-microstructure.md
   - methods/multi-head-attention.md
   - connections/deep-learning-meets-market-microstructure.md
+  - concepts/transformer-architecture.md
+  - papers/explainable-crypto-microstructure.md
+  - papers/mlofi-xu-gould-howison.md
+  - papers/reality-gap-lob-simulation.md
+  - papers/universal-price-formation-sirignano-cont.md
 confidence: medium
 ---
 

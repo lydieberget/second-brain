@@ -15,6 +15,7 @@ related:
   - concepts/transformer-architecture.md
   - methods/multi-head-attention.md
   - entities/google-brain.md
+  - connections/deep-learning-meets-market-microstructure.md
 confidence: high
 ---
 

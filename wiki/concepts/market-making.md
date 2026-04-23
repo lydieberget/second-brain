@@ -20,6 +20,7 @@ related:
   - concepts/limit-order-book.md
   - papers/cfmm-liquidity-provision-pricing.md
   - papers/explainable-crypto-microstructure.md
+  - papers/lipton-quote-imbalance.md
 confidence: high
 ---
 

@@ -20,9 +20,9 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-# Obsidian
-.obsidian/workspace.json
-.obsidian/workspace-mobile.json
+# Obsidian (workspace state — local UI only, churns every session)
+**/.obsidian/workspace.json
+**/.obsidian/workspace-mobile.json
 
 # Large PDFs (track with git-lfs or exclude)
 # Uncomment if you don't want PDFs in git:

@@ -19,8 +19,11 @@ related:
   - concepts/market-microstructure.md
   - concepts/adverse-selection.md
   - methods/propagator-model.md
+  - methods/almgren-chriss.md
   - papers/price-impact-order-book-events.md
   - papers/brokmann-slow-decay-impact.md
+  - entities/jean-philippe-bouchaud.md
+  - papers/eisler-bouchaud-kockelkoren-order-book-events.md
 confidence: high
 ---
 

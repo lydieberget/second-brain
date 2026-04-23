@@ -19,6 +19,8 @@ related:
   - concepts/market-microstructure.md
   - concepts/limit-order-book.md
   - papers/price-impact-order-book-events.md
+  - methods/signal-aware-optimal-execution.md
+  - methods/almgren-chriss.md
 confidence: high
 ---
 

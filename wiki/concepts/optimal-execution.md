@@ -5,6 +5,7 @@ created: 2026-04-16
 updated: 2026-04-16
 sources:
   - raw/papers/2603.28898.md
+  - raw/papers/1704.00847.md
 tags:
   - optimal-execution
   - market-microstructure
@@ -16,8 +17,16 @@ related:
   - concepts/price-impact.md
   - concepts/market-microstructure.md
   - concepts/limit-order-book.md
+  - concepts/order-flow-imbalance.md
+  - methods/signal-aware-optimal-execution.md
+  - methods/propagator-model.md
+  - methods/almgren-chriss.md
   - papers/mpc-trade-execution.md
   - papers/price-impact-order-book-events.md
+  - papers/lehalle-neuman-signals-optimal-trading.md
+  - entities/charles-albert-lehalle.md
+  - papers/brokmann-slow-decay-impact.md
+  - papers/lipton-quote-imbalance.md
 confidence: high
 ---
 
@@ -53,7 +62,7 @@ Good policies interpolate; that's where the modelling happens.
 ### Static schedules (classical era)
 
 - **Bertsimas & Lo (1998)** — DP formulation under linear impact → optimum is **TWAP**; the baseline for flat linear impact.
-- **Almgren & Chriss (2001)** — mean-variance formulation penalises cost *uncertainty*; produces an **efficient frontier of execution paths** analogous to Markowitz. Static schedule set once before trading.
+- **[[methods/almgren-chriss|Almgren & Chriss (2001)]]** — mean-variance formulation penalises cost *uncertainty*; produces an **efficient frontier of execution paths** analogous to Markowitz. Static schedule set once before trading. Remains the industry-default baseline.
 - **VWAP-tracking** — industry default; follows the intraday U-shaped volume profile. Introduced by Berkowitz et al.
 
 ### Dynamic / online methods
@@ -62,6 +71,12 @@ Good policies interpolate; that's where the modelling happens.
 - **Busetti & Boyd (2005)** — LQG stochastic control under VWAP benchmark, handles revealed-volume uncertainty via DP.
 - **Reinforcement Learning** (Nevmyvaka 2006; Hendricks–Wilcox; Moallemi–Wang; Li et al. hierarchical RL) — model-free execution policies trained directly on LOB data; action spaces vary from raw aggressiveness scalar to fractions of an Almgren-Chriss schedule.
 - **Model Predictive Control** — treats execution as approximate DP with one-step lookahead and a rollout base policy; solves a fast QP per decision step. See [[papers/mpc-trade-execution]].
+
+### Signal-aware frameworks
+
+- **Lehalle-Neuman (2019)** — incorporate a Markovian (e.g. Ornstein-Uhlenbeck) signal into the Gatheral-Schied-Slynko transient-impact problem. Closed-form optimal schedule for OU signal + exponential-decay impact, linear in both initial inventory and initial signal value. See [[methods/signal-aware-optimal-execution]] and [[papers/lehalle-neuman-signals-optimal-trading]].
+- **Cartea-Jaimungal (2015-)** — continuous absolutely-continuous trading under instantaneous impact + bounded Markov signal. The $\rho \to \infty$ limit of Lehalle-Neuman.
+- Key empirical input: order-book imbalance is an OU-like signal, actively used by HFT market makers to tilt their trading rate.
 
 ---
 
@@ -94,11 +109,13 @@ See [[concepts/price-impact]] for the full picture.
 
 ## Open questions
 
-- How much of the Almgren-Chriss efficient frontier survives once realistic, non-linear, non-stationary impact is used?
+- How much of the [[methods/almgren-chriss|Almgren-Chriss]] efficient frontier survives once realistic, non-linear, non-stationary impact is used?
 - What is the right base policy for MPC rollout, and can it be learned rather than handcrafted?
 - Are RL policies trained in simulation actually robust in live trading, or do they overfit to the simulator's impact model?
 - Cross-venue routing (fragmented markets, dark pools) introduces a much richer action space — how do classical frameworks extend?
-- How should executed volume be sized against short-horizon [[concepts/order-flow-imbalance]] signals? The OFI literature gives directional pressure; execution needs to translate that into inventory-aware sizing.
+- ~~How should executed volume be sized against short-horizon [[concepts/order-flow-imbalance]] signals?~~ — largely addressed by [[methods/signal-aware-optimal-execution]] for OU-type signals; open for non-OU signals and for cross-asset OFI inputs.
+- Does signal-aware execution admit transaction-triggered **price manipulation**? Lehalle-Neuman show non-monotone optimal strategies exist; the conditions on impact kernel and signal that rule out manipulation are open.
+- How to handle signal-aware execution's **time inconsistency** under transient impact? Re-planning vs commit-at-$t=0$ vs collapse to CJ limit — no principled resolution.
 
 ---
 

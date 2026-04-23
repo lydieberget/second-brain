@@ -17,6 +17,7 @@ related:
   - concepts/market-microstructure.md
   - papers/forecasting-high-frequency-ofi.md
   - papers/order-flow-filtration.md
+  - methods/propagator-model.md
 confidence: high
 ---
 

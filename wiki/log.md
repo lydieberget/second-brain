@@ -4,6 +4,140 @@ Chronological record of all ingest, lint, and build operations.
 
 ---
 
+## 2026-04-23 — Lint-fix pass + Almgren-Chriss promotion
+
+Applied both outstanding lint findings from the earlier report:
+
+1. **Backlink auto-fix (96 entries across 28 pages)** — one-shot Python script added missing reciprocal entries to `related:` frontmatter blocks where A linked to B but B didn't list A. Pure metadata, no body edits. Script deleted after use (`scripts/fix_backlinks_tmp.py`, not committed). Heaviest recipients: `concepts/order-flow-imbalance` (+19), `papers/price-impact-order-book-events` (+14), `concepts/limit-order-book` (+8), `concepts/price-impact` (+7), `papers/deep-lob-forecasting` (+5).
+
+2. **Almgren-Chriss promoted to method page** — created `methods/almgren-chriss.md` (referenced across 4 papers: BFL propagator, Brokmann, Lehalle-Neuman, MPC execution; previously only inline in `concepts/optimal-execution.md`). Page covers: exponential-decay optimal schedule, efficient frontier, linear-impact cost model, lineage to Obizhaeva-Wang / GSS / Lehalle-Neuman, when-to-use guidance. Updates:
+   - Created: `methods/almgren-chriss.md`
+   - Updated: `concepts/optimal-execution.md` (wikilinks + `related:`)
+   - Updated: `papers/bouchaud-farmer-lillo-propagator.md`, `papers/brokmann-slow-decay-impact.md`, `papers/lehalle-neuman-signals-optimal-trading.md`, `papers/mpc-trade-execution.md` (added to `related:` on each)
+   - Updated: `wiki/index.md` (methods count 9 → 10, total pages 57 → 58)
+   - Updated: `site/mkdocs.yml` (nav entry)
+
+---
+
+## 2026-04-23 — Lint report (post-batch-ingest audit)
+
+Ran after the 2026-04-23 batch ingest of 5 papers. Summary:
+
+| Check | Result |
+|---|---|
+| 1. Missing frontmatter | **0 issues** (log.md has none by design) |
+| 2. Broken wikilinks | **0 real issues** (6 matches, all are literal examples in schema/skills docs or regex false positives on `\|`-escaped pipes in tables) |
+| 3. Orphan pages | **0 orphans** — every page has at least one incoming link |
+| 4. Thin pages (< 100 words body) | **0 issues** (earlier lint pass had false positives from an awk script that mis-handled `---` section breaks; rerun confirmed all pages have substantive bodies) |
+| 5. Missing method pages (promotion candidates, ≥2 paper references) | **1 strong + 3 borderline** — see below |
+| 6. Contradictions / low-confidence clusters | **0 flagged** (37 high / 14 medium / 0 low) |
+| 7. Stale content | **0 flagged** |
+| 8. Missing backlinks in `related:` frontmatter | **96 issues** — cosmetic reciprocity gaps; see below |
+| 9. Index / log sync | **perfect** — all 23 papers appear in both `index.md` and `log.md` |
+| 10. Source-file existence | **0 real issues** (only false match is `<id>.md` placeholder in `schema.md`) |
+
+**Total pages scanned**: 61.
+
+### Method-promotion candidates (Check 5)
+
+Named methods/models referenced in ≥2 paper pages but lacking a dedicated `wiki/methods/` page:
+
+| Name | # papers referencing | Recommendation |
+|---|---|---|
+| **Almgren-Chriss** | 4 (BFL propagator, Brokmann, Lehalle-Neuman, MPC execution) | **Promote** — foundational optimal-execution framework; currently only discussed inline in `concepts/optimal-execution.md`. Strongest candidate. |
+| Hasbrouck VAR | 2 (both EBK papers) | Marginal — already covered as "relation to VAR" section within `methods/event-type-impact-decomposition.md`. Leave as-is unless a third paper references it. |
+| LSTM | 2 (DeepLOB, universal-features) | Skip — generic ML primitive, not microstructure-specific. |
+| Ornstein-Uhlenbeck process | 2 (CSI300 OU-Lévy, Lehalle-Neuman) | Marginal — OU is used as a *modelling choice* in both, not as the subject. Leave unless it appears as a primary method in a future paper. |
+
+### Missing backlinks (Check 8)
+
+96 wikilink reciprocity gaps — page A's body links to page B, A appears in B's `related:` frontmatter, but B does NOT appear in A's `related:`. Purely cosmetic: affects Obsidian's backlinks panel and MkDocs' "related" rendering, not page readability.
+
+Top clusters by target:
+- `concepts/universal-price-formation` missing from 5 existing pages' `related` lists (limit-order-book, order-flow-imbalance, price-impact, papers/cross-impact-ofi-equity-markets, papers/price-impact-order-book-events).
+- `entities/jean-philippe-bouchaud` missing from 5 pages (price-impact, event-type-impact-decomposition, propagator-model, bouchaud-farmer-lillo-propagator, brokmann-slow-decay-impact).
+- `concepts/market-making` → `concepts/adverse-selection` / `limit-order-book` / `order-flow-imbalance` reciprocity missing (pre-dates this batch).
+- `concepts/optimal-execution` → `limit-order-book` / `order-flow-imbalance` / `price-impact` / `papers/price-impact-order-book-events` reciprocity missing (pre-dates this batch).
+
+**Recommendation**: auto-fix all 96 in a single mechanical pass — pure metadata updates, no risk to page content. Awaiting user confirmation before applying.
+
+### Regressions vs previous lint
+
+- No new broken wikilinks introduced by the 2026-04-23 batch.
+- New orphan count: **0** (batch ingest cross-linked properly).
+- New missing-backlink count attributable to the batch: ~40 of the 96 (other ~56 pre-date this ingest).
+- Index / log perfectly in sync after the batch.
+
+---
+
+## 2026-04-23 — Batch ingest: 5 OFI / impact / execution papers for LOB-snapshot signal design
+
+### Motivation
+
+User goal: design a signal from LOB snapshots and/or L3 order-book data. Surveyed the existing OFI cluster and identified five canonical papers that either (a) aggregate multi-level OFI information in ways the wiki did not cover, (b) establish theoretical footing for cross-asset / universal LOB models, or (c) provide the structural decomposition of impact by event type. All five are directly on the intersection of "what we have" and "what's needed for an L3/snapshot signal."
+
+### Papers ingested
+
+**1. "Cross-Impact of Order Flow Imbalance in Equity Markets" (arXiv:2112.13213)** — Cont, Cucuringu, Zhang, 2023
+- Created: `papers/cross-impact-ofi-equity-markets.md`
+- Created: `methods/integrated-ofi.md` (PCA first-PC multi-level aggregation)
+- Created: `concepts/cross-impact.md`
+- Created: `entities/mihai-cucuringu.md`
+- Updated: `concepts/order-flow-imbalance.md` (added integrated OFI variant, cross-impact section)
+- Updated: `concepts/price-impact.md` (added integrated OFI reference, cross-impact section)
+- Updated: `entities/rama-cont.md` (added cross-impact paper, Cucuringu collaborator)
+
+**2. "Universal Features of Price Formation in Financial Markets" (arXiv:1803.06917)** — Sirignano, Cont, 2018
+- Created: `papers/universal-price-formation-sirignano-cont.md`
+- Created: `concepts/universal-price-formation.md`
+- Created: `entities/justin-sirignano.md`
+- Updated: `connections/deep-learning-meets-market-microstructure.md` (added Sirignano-Cont as foundational reference; sharpened "universal LOB features" open question)
+- Updated: `entities/rama-cont.md` (added universal-features paper, Sirignano collaborator)
+
+**3. "The Price Impact of Order Book Events: Market Orders, Limit Orders and Cancellations" (arXiv:0904.0900)** — Eisler, Bouchaud, Kockelkoren, 2009
+- Created: `papers/eisler-bouchaud-kockelkoren-order-book-events.md`
+- Created: `methods/event-type-impact-decomposition.md` (EBK framework — 6 event types, bare impact extraction)
+- Created: `entities/jean-philippe-bouchaud.md`
+- Created: `entities/zoltan-eisler.md`
+- Updated: `methods/propagator-model.md` (added EBK and Models-for-all-order-book-events as extensions)
+- Updated: `concepts/price-impact.md` (added EBK sources + event-type decomposition section)
+
+**4. "Models for the Impact of All Order Book Events" (arXiv:1107.3364)** — Eisler, Bouchaud, Kockelkoren, 2011
+- Created: `papers/models-for-all-order-book-events.md`
+- Updated: `methods/event-type-impact-decomposition.md` (added HDIM / influence matrix material, source)
+- Updated: `methods/propagator-model.md` (source)
+- Updated: `concepts/price-impact.md` (source)
+
+**5. "Incorporating Signals into Optimal Trading" (arXiv:1704.00847)** — Lehalle, Neuman, 2019
+- Created: `papers/lehalle-neuman-signals-optimal-trading.md`
+- Created: `methods/signal-aware-optimal-execution.md` (GSS + Markovian signal closed form)
+- Created: `entities/charles-albert-lehalle.md`
+- Updated: `concepts/optimal-execution.md` (added signal-aware frameworks section; closed two open questions with the Lehalle-Neuman framework; added time-inconsistency and price-manipulation open questions)
+
+### Summary
+
+- Papers created: 5
+- Methods created: 3 (integrated-ofi, event-type-impact-decomposition, signal-aware-optimal-execution)
+- Concepts created: 2 (cross-impact, universal-price-formation)
+- Entities created: 5 (cucuringu, sirignano, bouchaud, eisler, lehalle)
+- Existing pages updated: 7
+- **Total pages touched: 22** (comfortably within the 10–20-per-paper target across the batch, given heavy cross-referencing between the two EBK papers and between Lehalle-Neuman and the cross-impact / integrated-OFI story)
+
+### Cross-paper themes surfaced
+
+1. **The integrated-OFI thread**: Cont-Kukanov-Stoikov → MLOFI → Generalized OFI → Integrated OFI (Cont-Cucuringu-Zhang 2023) — each step aggregating more LOB information, with integrated OFI reaching ~84% OOS R² on Nasdaq-100 minute returns.
+2. **Universality thread**: Cont-Kukanov-Stoikov (linear, depth-rescaled) → Sirignano-Cont (full nonlinear LOB → next-move map is universal) → Cont-Cucuringu-Zhang (cross-impact disappears once multi-level info is integrated — another face of universality).
+3. **Event-type structural decomposition thread**: Bouchaud-Farmer-Lillo propagator → EBK (2009: bare impacts per event type, tick-size split) → EBK (2011: TIM vs HDIM, influence matrix). Full L3 decomposition with measurable structural coefficients.
+4. **Signal-to-execution thread**: Gatheral-Schied-Slynko → Obizhaeva-Wang → Cartea-Jaimungal → Lehalle-Neuman (signal + transient impact closed form). Directly operationalises LOB signals as execution-schedule tilts.
+
+### Contradictions & flags
+
+- None flagged. The new papers extend and refine earlier work rather than contradict it.
+- Capponi-Cont (2020) argument that cross-impact is subsumed by a common factor is *extended* by Cont-Cucuringu-Zhang via multi-level integration, not overturned.
+- Earlier Benzaquen et al. (2017) cross-impact findings are consistent with the Cont-Cucuringu-Zhang *predictive* cross-impact result but not the *contemporaneous* null result.
+
+---
+
 ## 2026-04-18 — CLAUDE.md split into skills; public Skills section added
 
 ### Rationale

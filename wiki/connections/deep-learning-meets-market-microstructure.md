@@ -2,11 +2,12 @@
 title: "Deep Learning Meets Market Microstructure"
 type: connection
 created: 2026-04-15
-updated: 2026-04-16
+updated: 2026-04-23
 sources:
   - raw/papers/1706.03762.md
   - raw/papers/2403.09267.md
   - raw/papers/2602.00776.md
+  - raw/papers/1803.06917.md
 tags:
   - connection
   - deep-learning
@@ -17,9 +18,12 @@ related:
   - concepts/transformer-architecture.md
   - concepts/limit-order-book.md
   - concepts/market-microstructure.md
+  - concepts/universal-price-formation.md
   - papers/attention-is-all-you-need.md
   - papers/deep-lob-forecasting.md
   - papers/explainable-crypto-microstructure.md
+  - papers/universal-price-formation-sirignano-cont.md
+  - entities/justin-sirignano.md
 confidence: medium
 ---
 
@@ -66,6 +70,7 @@ From the microstructure side, the theoretical underpinning is [[concepts/order-f
 | Paper | Contribution |
 |---|---|
 | [[papers/attention-is-all-you-need]] | Introduced the Transformer; enabling technology for sequence-based LOB models |
+| [[papers/universal-price-formation-sirignano-cont]] | LSTM trained on pooled Nasdaq data from ~500 stocks beats stock-specific models, including on unseen stocks. Foundational evidence for universal price formation. |
 | [[papers/deep-lob-forecasting]] | Systematic benchmark of DL models on NASDAQ LOB; proposes operational evaluation metric |
 | [[papers/explainable-crypto-microstructure]] | CatBoost + SHAP on crypto LOB; shows cross-asset feature stability |
 
@@ -76,7 +81,7 @@ From the microstructure side, the theoretical underpinning is [[concepts/order-f
 - **Accuracy vs tradability**: [[papers/deep-lob-forecasting]] shows high accuracy does not guarantee trading utility. Why? Execution latency, transaction costs, adverse selection on the other side.
 - **Black box vs theory**: tree models with SHAP recover microstructure theory (OFI dominant). Do Transformer attention weights also recover it?
 - **Non-stationarity**: LOB microstructure evolves (market structure changes, new participants). Do DL models that train on historical data overfit to regime-specific patterns?
-- **Universal LOB features**: [[papers/explainable-crypto-microstructure]] argues for portable features across crypto assets. Does this extend to equities or FX?
+- **Universal LOB features**: [[papers/explainable-crypto-microstructure]] argues for portable features across crypto assets. [[papers/universal-price-formation-sirignano-cont]] establishes the same for US equities. Does the unified "universal map" survive when you mix equities, crypto, FX, and futures in one training set? Open.
 
 ---
 

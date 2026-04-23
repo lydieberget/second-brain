@@ -19,6 +19,7 @@ related:
   - concepts/adverse-selection.md
   - entities/rama-cont.md
   - entities/sasha-stoikov.md
+  - methods/hawkes-process.md
 confidence: high
 ---
 

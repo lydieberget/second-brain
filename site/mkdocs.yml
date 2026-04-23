@@ -88,6 +88,8 @@ nav:
       - papers/attention-is-all-you-need.md
       - papers/price-impact-order-book-events.md
       - papers/bouchaud-farmer-lillo-propagator.md
+      - papers/eisler-bouchaud-kockelkoren-order-book-events.md
+      - papers/models-for-all-order-book-events.md
       - papers/brokmann-slow-decay-impact.md
       - papers/lipton-quote-imbalance.md
       - papers/gould-bonart-queue-imbalance.md
@@ -95,17 +97,22 @@ nav:
       - papers/price-impact-generalized-ofi.md
       - papers/csi300-ou-levy-ofi.md
       - papers/adaptive-learning-csi300.md
+      - papers/universal-price-formation-sirignano-cont.md
+      - papers/cross-impact-ofi-equity-markets.md
       - papers/deep-lob-forecasting.md
       - papers/forecasting-high-frequency-ofi.md
       - papers/order-flow-filtration.md
       - papers/explainable-crypto-microstructure.md
       - papers/reality-gap-lob-simulation.md
+      - papers/lehalle-neuman-signals-optimal-trading.md
       - papers/mpc-trade-execution.md
       - papers/cfmm-liquidity-provision-pricing.md
       - papers/entropic-signatures-market-response.md
   - Concepts:
       - concepts/order-flow-imbalance.md
       - concepts/price-impact.md
+      - concepts/cross-impact.md
+      - concepts/universal-price-formation.md
       - concepts/limit-order-book.md
       - concepts/market-microstructure.md
       - concepts/adverse-selection.md
@@ -118,12 +125,21 @@ nav:
       - methods/shap-values.md
       - methods/queue-reactive-model.md
       - methods/propagator-model.md
+      - methods/event-type-impact-decomposition.md
       - methods/microprice.md
+      - methods/almgren-chriss.md
+      - methods/integrated-ofi.md
+      - methods/signal-aware-optimal-execution.md
   - Connections:
       - connections/deep-learning-meets-market-microstructure.md
   - Entities:
       - entities/rama-cont.md
       - entities/sasha-stoikov.md
+      - entities/jean-philippe-bouchaud.md
+      - entities/zoltan-eisler.md
+      - entities/justin-sirignano.md
+      - entities/mihai-cucuringu.md
+      - entities/charles-albert-lehalle.md
       - entities/google-brain.md
   - Mind Maps:
       - mindmaps/market-microstructure.md

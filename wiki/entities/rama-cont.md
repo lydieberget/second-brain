@@ -2,9 +2,11 @@
 title: "Rama Cont"
 type: entity
 created: 2026-04-15
-updated: 2026-04-15
+updated: 2026-04-23
 sources:
   - raw/papers/1011.6402.md
+  - raw/papers/2112.13213.md
+  - raw/papers/1803.06917.md
 tags:
   - person
   - market-microstructure
@@ -12,8 +14,14 @@ tags:
   - stochastic-processes
 related:
   - entities/sasha-stoikov.md
+  - entities/mihai-cucuringu.md
+  - entities/justin-sirignano.md
   - papers/price-impact-order-book-events.md
+  - papers/cross-impact-ofi-equity-markets.md
+  - papers/universal-price-formation-sirignano-cont.md
   - concepts/order-flow-imbalance.md
+  - concepts/cross-impact.md
+  - concepts/universal-price-formation.md
   - concepts/market-microstructure.md
 confidence: high
 ---
@@ -35,9 +43,15 @@ Professor of Mathematical Finance. Held positions at Columbia University, Imperi
 ## Notable papers (in this wiki)
 
 - [[papers/price-impact-order-book-events]] — "The Price Impact of Order Book Events" (with Kukanov, Stoikov, 2010)
+- [[papers/cross-impact-ofi-equity-markets]] — "Cross-Impact of Order Flow Imbalance in Equity Markets" (with Cucuringu, Zhang, 2023)
+- [[papers/universal-price-formation-sirignano-cont]] — "Universal Features of Price Formation in Financial Markets" (with Sirignano, 2018)
 
 ## Connections
 
 - [[entities/sasha-stoikov]] — frequent collaborator; co-authored the OFI paper.
+- [[entities/mihai-cucuringu]] — collaborator on cross-impact work.
+- [[entities/justin-sirignano]] — collaborator on universal-features deep-learning paper.
 - [[concepts/order-flow-imbalance]] — Cont et al. defined and validated this concept.
+- [[concepts/cross-impact]] — extended the OFI framework to multi-asset settings.
+- [[concepts/universal-price-formation]] — establishes that the LOB-to-price map is asset-agnostic.
 - [[concepts/market-microstructure]] — Cont is a central figure in empirical microstructure.

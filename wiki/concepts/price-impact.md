@@ -2,10 +2,13 @@
 title: "Price Impact"
 type: concept
 created: 2026-04-15
-updated: 2026-04-15
+updated: 2026-04-23
 sources:
   - raw/papers/1011.6402.md
   - raw/papers/2112.02947.md
+  - raw/papers/2112.13213.md
+  - raw/papers/0904.0900.md
+  - raw/papers/1107.3364.md
 tags:
   - market-microstructure
   - price-impact
@@ -13,11 +16,25 @@ tags:
   - trading
 related:
   - concepts/order-flow-imbalance.md
+  - concepts/cross-impact.md
   - concepts/limit-order-book.md
   - concepts/market-microstructure.md
   - concepts/adverse-selection.md
+  - methods/integrated-ofi.md
+  - methods/event-type-impact-decomposition.md
+  - methods/propagator-model.md
   - papers/price-impact-order-book-events.md
   - papers/price-impact-generalized-ofi.md
+  - papers/cross-impact-ofi-equity-markets.md
+  - papers/eisler-bouchaud-kockelkoren-order-book-events.md
+  - papers/models-for-all-order-book-events.md
+  - concepts/optimal-execution.md
+  - concepts/universal-price-formation.md
+  - entities/jean-philippe-bouchaud.md
+  - entities/zoltan-eisler.md
+  - methods/microprice.md
+  - papers/bouchaud-farmer-lillo-propagator.md
+  - papers/mpc-trade-execution.md
 confidence: high
 ---
 
@@ -68,6 +85,24 @@ Price impact is concave in trade size $Q$ — doubling the trade size does not d
 ## Relation to OFI
 
 Short-horizon price impact is primarily driven by [[concepts/order-flow-imbalance]], not by raw trade volume. The key insight from Cont et al. is that OFI — which measures the *net* pressure at the best bid/ask from all order book events (not just executed trades) — is a more robust predictor than volume alone.
+
+Subsequent work has shown that **aggregating across multiple book levels** via [[methods/integrated-ofi|integrated OFI]] raises OOS $R^2$ from $\sim\!65\%$ (best-level) to $\sim\!84\%$ on Nasdaq-100 ([[papers/cross-impact-ofi-equity-markets]]).
+
+## Cross-impact
+
+In a multi-asset setting, price impact generalises to [[concepts/cross-impact]] — the effect of asset $j$'s order flow on asset $i$'s price. Empirically:
+
+- **Contemporaneous** cross-impact is negligible once you use integrated OFI (the multi-level aggregation subsumes it).
+- **Predictive** (lagged) cross-impact is real at short horizons ($\leq 3$ min) and decays rapidly with forecast horizon.
+
+## Event-type decomposition
+
+At the finest resolution, price impact can be decomposed by the six [[methods/event-type-impact-decomposition|EBK event types]] — market orders, limit orders, and cancellations, each split into "at-best" and "inside-spread" variants. Key findings ([[papers/eisler-bouchaud-kockelkoren-order-book-events]], [[papers/models-for-all-order-book-events]]):
+
+- **Limit-order impact is real and ~60–70% of market-order impact** — trade-tape-only studies underestimate total impact.
+- **Large-tick stocks**: bare impacts are permanent and non-fluctuating (simple constant-impact model fits).
+- **Small-tick stocks**: bare impacts acquire history dependence via gap fluctuations; a linear AR model on past event flow captures it.
+- The market-order-only propagator $G(\tau)$ in earlier [[methods/propagator-model|propagator work]] is "dressed" by unobserved LO/CA flow — separating them recovers the true bare impacts.
 
 ---
 

@@ -25,6 +25,9 @@ related:
   - papers/price-impact-order-book-events.md
   - papers/deep-lob-forecasting.md
   - connections/deep-learning-meets-market-microstructure.md
+  - concepts/market-making.md
+  - papers/cfmm-liquidity-provision-pricing.md
+  - papers/mlofi-xu-gould-howison.md
 confidence: medium
 ---
 

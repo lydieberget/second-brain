@@ -21,6 +21,7 @@ related:
   - papers/price-impact-order-book-events.md
   - papers/price-impact-generalized-ofi.md
   - papers/forecasting-high-frequency-ofi.md
+  - papers/adaptive-learning-csi300.md
 confidence: medium
 ---
 

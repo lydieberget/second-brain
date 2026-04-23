@@ -20,6 +20,14 @@ related:
   - papers/price-impact-order-book-events.md
   - papers/deep-lob-forecasting.md
   - papers/explainable-crypto-microstructure.md
+  - concepts/market-making.md
+  - concepts/optimal-execution.md
+  - concepts/universal-price-formation.md
+  - connections/deep-learning-meets-market-microstructure.md
+  - methods/event-type-impact-decomposition.md
+  - methods/integrated-ofi.md
+  - methods/microprice.md
+  - methods/queue-reactive-model.md
 confidence: high
 ---
 

@@ -20,6 +20,7 @@ related:
   - methods/hawkes-process.md
   - papers/forecasting-high-frequency-ofi.md
   - papers/price-impact-order-book-events.md
+  - methods/propagator-model.md
 confidence: medium
 ---
 

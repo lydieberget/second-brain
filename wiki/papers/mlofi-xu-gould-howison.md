@@ -20,6 +20,9 @@ related:
   - papers/price-impact-order-book-events.md
   - papers/deep-lob-forecasting.md
   - papers/explainable-crypto-microstructure.md
+  - methods/integrated-ofi.md
+  - papers/cross-impact-ofi-equity-markets.md
+  - papers/gould-bonart-queue-imbalance.md
 confidence: high
 ---
 

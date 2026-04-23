@@ -18,6 +18,9 @@ related:
   - concepts/price-impact.md
   - papers/explainable-crypto-microstructure.md
   - papers/order-flow-filtration.md
+  - concepts/market-making.md
+  - papers/bouchaud-farmer-lillo-propagator.md
+  - papers/cfmm-liquidity-provision-pricing.md
 confidence: high
 ---
 

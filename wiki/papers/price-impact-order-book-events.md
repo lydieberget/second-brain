@@ -20,6 +20,20 @@ related:
   - entities/sasha-stoikov.md
   - papers/price-impact-generalized-ofi.md
   - papers/forecasting-high-frequency-ofi.md
+  - concepts/optimal-execution.md
+  - concepts/universal-price-formation.md
+  - papers/bouchaud-farmer-lillo-propagator.md
+  - papers/brokmann-slow-decay-impact.md
+  - papers/cross-impact-ofi-equity-markets.md
+  - papers/csi300-ou-levy-ofi.md
+  - papers/eisler-bouchaud-kockelkoren-order-book-events.md
+  - papers/explainable-crypto-microstructure.md
+  - papers/lipton-quote-imbalance.md
+  - papers/mlofi-xu-gould-howison.md
+  - papers/models-for-all-order-book-events.md
+  - papers/mpc-trade-execution.md
+  - papers/order-flow-filtration.md
+  - papers/universal-price-formation-sirignano-cont.md
 confidence: high
 ---
 

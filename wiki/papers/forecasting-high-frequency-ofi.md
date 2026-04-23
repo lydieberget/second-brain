@@ -19,6 +19,8 @@ related:
   - concepts/market-microstructure.md
   - papers/price-impact-order-book-events.md
   - papers/order-flow-filtration.md
+  - papers/csi300-ou-levy-ofi.md
+  - papers/price-impact-generalized-ofi.md
 confidence: medium
 ---
 

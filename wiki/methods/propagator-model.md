@@ -7,6 +7,8 @@ sources:
   - raw/papers/0809.0822.md
   - raw/papers/1407.3390.md
   - raw/papers/2603.24137.md
+  - raw/papers/0904.0900.md
+  - raw/papers/1107.3364.md
 tags:
   - market-impact
   - propagator-model
@@ -19,10 +21,16 @@ related:
   - concepts/order-flow-imbalance.md
   - concepts/optimal-execution.md
   - methods/hawkes-process.md
+  - methods/event-type-impact-decomposition.md
   - papers/bouchaud-farmer-lillo-propagator.md
   - papers/brokmann-slow-decay-impact.md
   - papers/reality-gap-lob-simulation.md
   - papers/order-flow-filtration.md
+  - papers/eisler-bouchaud-kockelkoren-order-book-events.md
+  - papers/models-for-all-order-book-events.md
+  - entities/jean-philippe-bouchaud.md
+  - methods/signal-aware-optimal-execution.md
+  - papers/lehalle-neuman-signals-optimal-trading.md
 confidence: high
 ---
 
@@ -105,6 +113,8 @@ A fat-tailed $G$ with $\beta < 1/2$ can diverge. In multivariate (multi-asset, m
 | Paper | Role of propagator |
 |---|---|
 | [[papers/bouchaud-farmer-lillo-propagator]] | Introduces the framework; surveys empirics |
+| [[papers/eisler-bouchaud-kockelkoren-order-book-events]] | Generalises propagator to six event types (MO/LO/CA × at-best/inside-spread). See [[methods/event-type-impact-decomposition]]. |
+| [[papers/models-for-all-order-book-events]] | Fully dynamic extension — history-dependent bare impacts for small-tick stocks via linear AR model on gaps. |
 | [[papers/brokmann-slow-decay-impact]] | Empirical calibration via deconvolution on CFM meta-orders |
 | [[papers/reality-gap-lob-simulation]] | Embeds a power-law decay kernel into an extended queue-reactive simulator to reproduce concave impact during execution and partial reversion after |
 | [[papers/order-flow-filtration]] | Uses Hawkes kernel norms — the multivariate generalisation — as diagnostic of OBI→return excitation |

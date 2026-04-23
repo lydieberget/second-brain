@@ -17,6 +17,10 @@ related:
   - concepts/limit-order-book.md
   - papers/price-impact-order-book-events.md
   - papers/forecasting-high-frequency-ofi.md
+  - methods/integrated-ofi.md
+  - papers/adaptive-learning-csi300.md
+  - papers/cross-impact-ofi-equity-markets.md
+  - papers/csi300-ou-levy-ofi.md
 confidence: medium
 ---
 
