@@ -4,6 +4,16 @@ Chronological record of all ingest, lint, and build operations.
 
 ---
 
+## 2026-04-23 — Deployed to https://lydieberget.github.io/second-brain/
+
+- Pushed commit `df08812` to `main`; GitHub Actions workflow `deploy-pages.yml` built and published in 33 s.
+- Build output: 62 pages synced, 57 wikilink rewrites, MathJax preflight clean, strict MkDocs build zero warnings.
+- New content since last deploy (2026-04-19): 2026-04-23 batch ingest (5 papers, 3 methods, 2 concepts, 5 entities), 96-entry reciprocal-backlink lint fix, Almgren-Chriss method page promotion. 54 files changed, +6091 / −242.
+- Spot-checked live URLs return 200: `/`, `/papers/cross-impact-ofi-equity-markets/`, `/methods/almgren-chriss/`.
+- **Browser verification of MathJax rendering still required** (per project memory: curl-level 200s do not validate SPA-nav re-typeset).
+
+---
+
 ## 2026-04-23 — Lint-fix pass + Almgren-Chriss promotion
 
 Applied both outstanding lint findings from the earlier report:
